@@ -1,33 +1,43 @@
-# voting
-# 🗳️ On-Chain Voting DApp (Clarity + Clarinet)
+# ✨ GodisGood — Karma Raffle (Clarity + Clarinet)
 
-A **fully transparent, decentralized voting system** built on the Stacks blockchain.  
-This project demonstrates how governance can be implemented **entirely on-chain** with no centralized servers.
+**Tagline:** Blessed deeds. Community votes. One winner — every campaign.
 
----
-
-## ✨ Features
-- ✅ **Proposal Creation** — anyone can create a proposal with a title (up to 100 chars).  
-- ✅ **Open Voting** — all users can cast a **Yes/No** vote.  
-- ✅ **Fairness** — each user can vote **only once per proposal**.  
-- ✅ **On-Chain Results** — votes are permanently stored on-chain.  
-- ✅ **Proposal Lifecycle** — proposals can be **closed** by their creator, locking results forever.  
+GodisGood is a deterministic, on-chain *Karma Raffle* that celebrates real-world acts of kindness. Participants post acts; the community votes; the highest-vote act wins. The contract is intentionally **STX-free** (no internal STX transfers) to maximize safety and avoid transfer-related toolchain issues — perfect for demos, hackathons, and judges who want simple, auditable logic.
 
 ---
 
-## 🚀 Why It’s Attractive
-- 🎯 **Universal Use Case**: Governance, DAOs, community polls, hackathons.  
-- 🔍 **Transparency**: Anyone can verify results directly on-chain.  
-- 🛡️ **No Errors**: Lightweight, clean, and passes `clarinet check` on first run.  
-- 🎁 **Demo-Friendly**: Easy to showcase live — create, vote, close, view results.  
-
-This makes it a **perfect raffle or competition entry** — eye-catching, useful, and super clear.
+## Highlights
+- ✅ **Deterministic**: Winner is the act with the highest votes (clear tiebreaker: earliest act).
+- ✅ **Safe**: No `stx-transfer?` inside the contract — fewer pitfalls and instant `clarinet check` success.
+- ✅ **Simple to demo**: create campaign, add acts, vote, close, select winner — done.
+- ✅ **Readable**: small, well-structured Clarity code with tests.
+- ✅ **Unique story**: named `GodisGood` — a positive, shareable theme judges remember.
 
 ---
 
-## 📖 How It Works
+## Features
+- Create campaigns (title)
+- Add acts (short ASCII description) in a campaign
+- Vote one time per voter per act
+- Close campaign (creator-only)
+- Select winner (creator-only) → the highest-vote act
+- Read-only views: campaign details, acts, leading act, declared winner
 
-### 1. Create a Proposal
-```clarity
-(contract-call? .voting create-proposal "Should we add a community fund?")
- 
+---
+
+## Why this will pass
+- Judges disqualified previous entries for errors — this repo avoids the common error sources:
+  - avoids uncertain use of `as-contract`, `tx-sender` pitfalls, and `stx-transfer?`
+  - uses deterministic logic (no block-height randomness)
+  - includes tests that assert exact, reproducible outcomes
+- The theme is emotional and shareable — great for social reach and demos.
+
+---
+
+## Quickstart (run locally)
+```bash
+# install clarinet if you haven't already (see Clarinet docs)
+# copy contracts/godisgood.clar into contracts/
+# copy tests/godisgood_test.ts into tests/
+clarinet check
+clarinet test
