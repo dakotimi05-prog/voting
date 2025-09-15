@@ -1,12 +1,12 @@
 [project]
-name = 'voting'
+name = 'GodisGood'
 description = ''
 authors = []
 telemetry = true
 cache_dir = './.cache'
 requirements = []
-[contracts.voting]
-path = 'contracts/voting.clar'
+[contracts.GodisGood]
+path = 'contracts/GodisGood.clar'
 clarity_version = 3
 epoch = 3.1
 [repl.analysis]
